@@ -1,32 +1,19 @@
 import { createContext } from "react"
-import { Observable } from "rxjs"
+import { BehaviorSubject, Observable, Subject } from "rxjs"
 import { subscriptions } from "./subscribe"
-
-export let Context = createContext()
 
 export const createStore = (reducer) => {
 
-    let state = {}
+    let state = new BehaviorSubject({})
+    
     let store = {
-        subscribe: () => {
-            Object.keys(subscriptions).map((type) => {
-                return subscriptions[type].subscribe(value => {
-                    state = reducer(state, value)
-                })
-            })
-        },
         getState: () => {
             return state
         },
         dispatch: (type, args) => {
-            subscriptions[type].next({
-                type,
-                ...args
-            })
-        },
+            state.next(reducer(state, subscriptions[type]))
+        }
     }
-
-    store.subscribe()
 
     return store
 }
