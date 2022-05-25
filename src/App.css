@@ -1,3 +1,12 @@
-body {
+.App {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  text-align: center;
+}
+
+.App button:first-of-type {
+  margin-right: 5px;
+}
+
+.App button:last-of-type {
+  margin-left: 5px;
 }

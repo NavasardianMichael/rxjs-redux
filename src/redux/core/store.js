@@ -1,19 +1,17 @@
-import { createContext } from "react"
-import { BehaviorSubject, Observable, Subject } from "rxjs"
-import { subscriptions } from "./subscribe"
+import { BehaviorSubject } from "rxjs"
 
-export const createStore = (reducer) => {
+export const createStore = (reducer, preloadedState) => {
 
-    let state = new BehaviorSubject({})
-    
+    let stateObservable = new BehaviorSubject()
+    let state = preloadedState
+
     let store = {
-        getState: () => {
-            return state
-        },
-        dispatch: (type, args) => {
-            state.next(reducer(state, subscriptions[type]))
-        }
+        getObservablestate: () => stateObservable,
+        getState: () => state,
+        dispatch: (args) => stateObservable.next(reducer(state, args))
     }
+
+    stateObservable.subscribe(val => state = val)
 
     return store
 }

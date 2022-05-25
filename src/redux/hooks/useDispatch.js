@@ -1,8 +1,6 @@
-import { useContext } from "react";
-import { Context } from "../core/Provider";
+import { useStore } from "./useStore";
 
 export function useDispatch() {
-    const context = useContext(Context)
-// console.log({context});
-    return context.dispatch
+    const currentStore = useStore()
+    return currentStore.dispatch
 }
