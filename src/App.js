@@ -5,8 +5,8 @@ import './App.css';
 
 function App() {
 
-  const counter = useSelector((state) => state?.counter ?? 0)
   const dispatch = useDispatch()
+  const counter = useSelector((state) => state?.counter ?? 0)
 
   return (
     <div className="App">

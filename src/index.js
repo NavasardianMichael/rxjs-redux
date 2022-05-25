@@ -1,16 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import { createStore } from './redux/core/createStore';
 import Provider from './redux/core/Provider';
-import { createStore } from './redux/core/store';
 import { reducer } from './store/reducer';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const preloadedState = {
-  counter: 0
-}
 
-const store = createStore(reducer, preloadedState)
+const store = createStore(reducer)
 
 root.render(
   <React.StrictMode>

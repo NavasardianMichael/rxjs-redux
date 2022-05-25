@@ -15,3 +15,11 @@ export const createStore = (reducer, preloadedState) => {
 
     return store
 }
+
+export const combineReducers = (reducers) => {
+    return (state, args) => {
+        for(let reducerName in reducers) {
+            reducers[reducerName](state, args)
+        }
+    }
+}
