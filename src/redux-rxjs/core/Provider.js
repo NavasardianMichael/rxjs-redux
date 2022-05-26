@@ -1,20 +1,15 @@
-import { createContext, useEffect, useRef, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 
 export const Context = createContext()
 
 const Provider = ({ store, children }) => {
 
     const [ storeContext, setStoreContext ] = useState(store)
-    const prevStateRef = useRef(null)
     
     useEffect(() => {
         // The current effect is called twice and eventually the subscription is done twice as well because of React StrictMode
-        store.getObservablestate().subscribe(emittedState => {
-            
-            if(emittedState === prevStateRef.current) return;
-
+        store.getObservablestate().subscribe(() => {
             setStoreContext({...store})
-            prevStateRef.current = store.getState()
         })
     }, [])
 

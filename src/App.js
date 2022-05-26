@@ -12,9 +12,23 @@ function App() {
 
   return (
     <div className='App'>
+    
       <p>{counter}</p>
-      <button name={DECREMENT} onClick={handleClick}>Decrement</button>
-      <button name={INCREMENT} onClick={handleClick}>Increment</button>
+    
+      <button 
+        name={DECREMENT}
+        onClick={handleClick}
+      >
+        Decrement
+      </button>
+      
+      <button 
+        name={INCREMENT} 
+        onClick={handleClick}
+      >
+        Increment
+      </button>
+    
     </div>
   )
 }
