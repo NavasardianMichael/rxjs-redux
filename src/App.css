@@ -3,6 +3,29 @@
   text-align: center;
 }
 
+.App > * {
+  font-size: 1.4rem;
+}
+
+.App button {
+  all: unset;
+  background-color: rgb(128, 128, 128);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(128, 128, 128);
+  padding: .6rem;
+  color: #FFF;
+  cursor: pointer;
+  transition-duration: .2s;
+}
+
+.App button:hover {
+  background-color: #FFF;
+  padding: .6rem;
+  color: rgb(128, 128, 128);
+  transition-duration: .2s;
+}
+
 .App button:first-of-type {
   margin-right: 5px;
 }

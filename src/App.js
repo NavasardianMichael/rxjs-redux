@@ -1,18 +1,20 @@
-import { useDispatch } from './redux/hooks/useDispatch';
-import { useSelector } from './redux/hooks/useSelector';
+import { useDispatch } from './redux-rxjs/hooks/useDispatch';
+import { useSelector } from './redux-rxjs/hooks/useSelector';
 import { DECREMENT, INCREMENT } from './store/actionTypes';
 import './App.css';
 
 function App() {
 
   const dispatch = useDispatch()
-  const counter = useSelector((state) => state?.counter ?? 0)
+  const counter = useSelector((state) => state?.counter.value ?? 0)
+
+  const handleClick = ({ target: { name } }) => dispatch({ type: name })
 
   return (
-    <div className="App">
+    <div className='App'>
       <p>{counter}</p>
-      <button onClick={() => dispatch({type: INCREMENT})}>Increment</button>
-      <button onClick={() => dispatch({type: DECREMENT})}>Decrement</button>
+      <button name={DECREMENT} onClick={handleClick}>Decrement</button>
+      <button name={INCREMENT} onClick={handleClick}>Increment</button>
     </div>
   )
 }

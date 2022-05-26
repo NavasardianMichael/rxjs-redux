@@ -1,5 +1,4 @@
-import { createContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
-import { BehaviorSubject, Observable, Subject } from "rxjs"
+import { createContext, useEffect, useRef, useState } from "react"
 
 export const Context = createContext()
 
@@ -9,8 +8,11 @@ const Provider = ({ store, children }) => {
     const prevStateRef = useRef(null)
     
     useEffect(() => {
-        store.getObservablestate().subscribe(val => {
-            if(storeContext === prevStateRef.current) return
+        // The current effect is called twice and eventually the subscription is done twice as well because of React StrictMode
+        store.getObservablestate().subscribe(emittedState => {
+            
+            if(emittedState === prevStateRef.current) return;
+
             setStoreContext({...store})
             prevStateRef.current = store.getState()
         })

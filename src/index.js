@@ -1,13 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import { createStore } from './redux/core/createStore';
-import Provider from './redux/core/Provider';
+import { combineReducers } from './redux-rxjs/core/combineReducers';
+import { createStore } from './redux-rxjs/core/createStore';
+import Provider from './redux-rxjs/core/Provider';
+
 import { reducer } from './store/reducer';
+import App from './App';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'))
 
-const store = createStore(reducer)
+const store = createStore(combineReducers({
+  counter: reducer
+}))
 
 root.render(
   <React.StrictMode>
@@ -15,5 +19,4 @@ root.render(
       <App />
     </Provider>
   </React.StrictMode>
-);
-
+)
